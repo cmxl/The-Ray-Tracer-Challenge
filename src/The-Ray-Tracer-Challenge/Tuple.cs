@@ -30,6 +30,8 @@
         public override bool Equals(object obj)
             => Equals((Tuple)obj);
 
+        public override int GetHashCode() => base.GetHashCode();
+
         public static bool operator ==(Tuple a, Tuple b)
             => a.Equals(b);
 
