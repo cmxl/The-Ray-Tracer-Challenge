@@ -1,5 +1,5 @@
 using NooBIT.Asserts;
-using The_Ray_Tracer_Challenge.Helpers;
+using The_Ray_Tracer_Challenge.Extensions;
 using Xunit;
 
 namespace The_Ray_Tracer_Challenge.Tests
@@ -14,8 +14,8 @@ namespace The_Ray_Tracer_Challenge.Tests
             Assert.Equal(-4.2, a.Y);
             Assert.Equal(3.1, a.Z);
             Assert.Equal(1.0, a.W);
-            Assert.True(TupleHelper.IsPoint(a));
-            Assert.False(TupleHelper.IsVector(a));
+            Assert.True(a.IsPoint());
+            Assert.False(a.IsVector());
         }
 
         [Fact]
@@ -26,8 +26,8 @@ namespace The_Ray_Tracer_Challenge.Tests
             Assert.Equal(-4.2, a.Y);
             Assert.Equal(3.1, a.Z);
             Assert.Equal(0.0, a.W);
-            Assert.False(TupleHelper.IsPoint(a));
-            Assert.True(TupleHelper.IsVector(a));
+            Assert.False(a.IsPoint());
+            Assert.True(a.IsVector());
         }
 
         [Fact]
@@ -41,8 +41,8 @@ namespace The_Ray_Tracer_Challenge.Tests
             point.Z.Should().Be.Equal(3);
             point.W.Should().Be.Equal(1);
 
-            Assert.True(TupleHelper.IsPoint(point));
-            Assert.False(TupleHelper.IsVector(point));
+            Assert.True(point.IsPoint());
+            Assert.False(point.IsVector());
 
             point.Should().Equal(expected);
         }
@@ -58,8 +58,8 @@ namespace The_Ray_Tracer_Challenge.Tests
             vector.Z.Should().Be.Equal(3);
             vector.W.Should().Be.Equal(0);
 
-            Assert.False(TupleHelper.IsPoint(vector));
-            Assert.True(TupleHelper.IsVector(vector));
+            Assert.False(vector.IsPoint());
+            Assert.True(vector.IsVector());
 
             vector.Should().Equal(expected);
         }

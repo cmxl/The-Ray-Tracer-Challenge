@@ -1,4 +1,6 @@
-﻿namespace The_Ray_Tracer_Challenge
+﻿using The_Ray_Tracer_Challenge.Extensions;
+
+namespace The_Ray_Tracer_Challenge
 {
     public struct Tuple
     {
@@ -14,6 +16,8 @@
         public double Y { get; set; }
         public double Z { get; set; }
         public double W { get; set; }
+
+        public double Magnitude => this.Magnitude();
 
         public static Tuple Point(double x, double y, double z)
             => new Tuple(x, y, z, 1.0);
@@ -39,15 +43,18 @@
             => !a.Equals(b);
 
         public static Tuple operator +(Tuple a, Tuple b)
-            => new Tuple(a.X + b.X,
-                         a.Y + b.Y,
-                         a.Z + b.Z,
-                         a.W + b.W);
+            => a.Add(b);
 
         public static Tuple operator -(Tuple a)
-            => new Tuple(-a.X, -a.Y, -a.Z, -a.W);
+            => a.Negate();
 
         public static Tuple operator -(Tuple a, Tuple b)
-            => new Tuple(a.X - b.X, a.Y - b.Y, a.Z - b.Z, a.W - b.W);
+            => a.Subtract(b);
+
+        public static Tuple operator *(Tuple a, double b)
+            => a.MultiplyBy(b);
+
+        public static Tuple operator /(Tuple a, double b)
+            => a.DivideBy(b);
     }
 }

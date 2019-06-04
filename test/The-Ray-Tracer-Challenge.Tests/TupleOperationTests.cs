@@ -1,4 +1,5 @@
 ﻿using NooBIT.Asserts;
+using The_Ray_Tracer_Challenge.Extensions;
 using Xunit;
 
 namespace The_Ray_Tracer_Challenge.Tests
@@ -6,6 +7,7 @@ namespace The_Ray_Tracer_Challenge.Tests
     public class TupleOperationTests
     {
         [Fact]
+        [Trait("Category", "Addition")]
         public void Adding_Two_Tuples()
         {
             var a = new Tuple(3, -2, 5, 1);
@@ -18,6 +20,7 @@ namespace The_Ray_Tracer_Challenge.Tests
         }
 
         [Fact]
+        [Trait("Category", "Subtraction")]
         public void Subtracting_Two_Points_Results_In_Vector()
         {
             var pointA = Tuple.Point(3, 2, 1);
@@ -30,6 +33,7 @@ namespace The_Ray_Tracer_Challenge.Tests
         }
 
         [Fact]
+        [Trait("Category", "Subtraction")]
         public void Subtracting_Vector_From_Point_Results_In_Point()
         {
             var p = Tuple.Point(3, 2, 1);
@@ -42,6 +46,7 @@ namespace The_Ray_Tracer_Challenge.Tests
         }
 
         [Fact]
+        [Trait("Category", "Subtraction")]
         public void Subtracting_Two_Vectors_Results_In_Vector()
         {
             var v1 = Tuple.Vector(3, 2, 1);
@@ -54,6 +59,7 @@ namespace The_Ray_Tracer_Challenge.Tests
         }
 
         [Fact]
+        [Trait("Category", "Subtraction")]
         public void Subtracting_A_Vector_From_The_Zero_Vector_Results_In_Negation()
         {
             var zero = Tuple.Vector(0, 0, 0);
@@ -67,6 +73,7 @@ namespace The_Ray_Tracer_Challenge.Tests
         }
 
         [Fact]
+        [Trait("Category", "Negation")]
         public void Negating_A_Tuple()
         {
             var a = new Tuple(1, -2, 3, -4);
@@ -75,6 +82,110 @@ namespace The_Ray_Tracer_Challenge.Tests
             var expected = new Tuple(-1, 2, -3, 4);
 
             result.Should().Equal(expected);
+        }
+
+        [Fact]
+        [Trait("Category", "Multiplication")]
+        public void Multiplying_A_Tuple_By_A_Scalar()
+        {
+            var a = new Tuple(1, -2, 3, -4);
+
+            var result = a * 3.5;
+            var expected = new Tuple(3.5, -7, 10.5, -14);
+
+            result.Should().Equal(expected);
+        }
+
+        [Fact]
+        [Trait("Category", "Multiplication")]
+        public void Multiplying_A_Tuple_By_A_Fraction()
+        {
+            var a = new Tuple(1, -2, 3, -4);
+
+            var result = a * 0.5;
+            var expected = new Tuple(0.5, -1, 1.5, -2);
+
+            result.Should().Equal(expected);
+        }
+
+        [Fact]
+        [Trait("Category", "Division")]
+        public void Dividing_A_Tuple_By_A_Scalar()
+        {
+            var a = new Tuple(1, -2, 3, -4);
+
+            var result = a / 2;
+            var expected = new Tuple(0.5, -1, 1.5, -2);
+
+            result.Should().Equal(expected);
+        }
+
+        [Theory]
+        [Trait("Category", "Magnitude")]
+        [InlineData(1, 0, 0)]
+        [InlineData(0, 1, 0)]
+        [InlineData(0, 0, 1)]
+        public void Magnitude_Of_Unit_Vectors_Should_Be_One(double x, double y, double z)
+        {
+            var v = Tuple.Vector(x, y, z);
+            v.Magnitude.Should().Equal(1);
+        }
+
+        [Theory]
+        [Trait("Category", "Magnitude")]
+        [InlineData(1, 2, 3)]
+        [InlineData(-1, -2, -3)]
+        public void Computing_The_Magnitude_Of_Vector_1_2_3(double x, double y, double z)
+        {
+            var v = Tuple.Vector(x, y, z);
+            v.Magnitude.Should().Equal(14.0d.SquareRoot());
+        }
+
+        [Fact]
+        [Trait("Category", "Normalization")]
+        public void Normalizing_Vector_4_0_0_Gives_1_0_0()
+        {
+            var v = Tuple.Vector(4, 0, 0);
+            var expected = Tuple.Vector(1, 0, 0);
+            v.Normalize().Should().Equal(expected);
+        }
+
+        [Fact]
+        [Trait("Category", "Normalization")]
+        public void Normalizing_Vector_1_2_3()
+        {
+            var v = Tuple.Vector(1, 2, 3);
+            var result = v.Normalize();
+            result.X.Should().Equal(0.26726, 5);
+            result.Y.Should().Equal(0.53452, 5);
+            result.Z.Should().Equal(0.80178, 5);
+        }
+
+        [Fact]
+        [Trait("Category", "ScalarProduct")]
+        public void Scalar_Product_Of_Two_Tuples()
+        {
+            var a = Tuple.Vector(1, 2, 3);
+            var b = Tuple.Vector(2, 3, 4);
+
+            var result = a.ScalarProduct(b);
+            result.Should().Equal(20);
+        }
+
+        [Fact]
+        [Trait("Category", "CrossProduct")]
+        public void Cross_Product_Of_Two_Vectors()
+        {
+            var a = Tuple.Vector(1, 2, 3);
+            var b = Tuple.Vector(2, 3, 4);
+
+            var result = a.CrossProduct(b);
+            var expected = Tuple.Vector(-1, 2, -1);
+            result.Should().Equal(expected);
+
+            var reversedResult = b.CrossProduct(a);
+            var reversedExpected = Tuple.Vector(1, -2, 1);
+            reversedResult.Should().Equal(reversedExpected);
         }
     }
 }
