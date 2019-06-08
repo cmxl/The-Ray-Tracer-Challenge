@@ -1,5 +1,4 @@
 using NooBIT.Asserts;
-using The_Ray_Tracer_Challenge.Extensions;
 using Xunit;
 
 namespace The_Ray_Tracer_Challenge.Tests
@@ -14,8 +13,8 @@ namespace The_Ray_Tracer_Challenge.Tests
             Assert.Equal(-4.2, a.Y);
             Assert.Equal(3.1, a.Z);
             Assert.Equal(1.0, a.W);
-            Assert.True(a.IsPoint());
-            Assert.False(a.IsVector());
+            Assert.True(a.IsPoint);
+            Assert.False(a.IsVector);
         }
 
         [Fact]
@@ -26,14 +25,14 @@ namespace The_Ray_Tracer_Challenge.Tests
             Assert.Equal(-4.2, a.Y);
             Assert.Equal(3.1, a.Z);
             Assert.Equal(0.0, a.W);
-            Assert.False(a.IsPoint());
-            Assert.True(a.IsVector());
+            Assert.False(a.IsPoint);
+            Assert.True(a.IsVector);
         }
 
         [Fact]
         public void Tuple_Point_Creates_A_Tuple_With_W_Equals_One()
         {
-            var point = Tuple.Point(4, -4, 3);
+            var point = new Point(4, -4, 3);
             var expected = new Tuple(4, -4, 3, 1);
 
             point.X.Should().Be.Equal(4);
@@ -41,8 +40,8 @@ namespace The_Ray_Tracer_Challenge.Tests
             point.Z.Should().Be.Equal(3);
             point.W.Should().Be.Equal(1);
 
-            Assert.True(point.IsPoint());
-            Assert.False(point.IsVector());
+            Assert.True(expected.IsPoint);
+            Assert.False(expected.IsVector);
 
             point.Should().Equal(expected);
         }
@@ -50,7 +49,7 @@ namespace The_Ray_Tracer_Challenge.Tests
         [Fact]
         public void Tuple_Vector_Creates_A_Tuple_With_W_Equals_Zero()
         {
-            var vector = Tuple.Vector(4, -4, 3);
+            Tuple vector = new Vector(4, -4, 3);
             var expected = new Tuple(4, -4, 3, 0);
 
             vector.X.Should().Be.Equal(4);
@@ -58,8 +57,8 @@ namespace The_Ray_Tracer_Challenge.Tests
             vector.Z.Should().Be.Equal(3);
             vector.W.Should().Be.Equal(0);
 
-            Assert.False(vector.IsPoint());
-            Assert.True(vector.IsVector());
+            Assert.False(expected.IsPoint);
+            Assert.True(expected.IsVector);
 
             vector.Should().Equal(expected);
         }

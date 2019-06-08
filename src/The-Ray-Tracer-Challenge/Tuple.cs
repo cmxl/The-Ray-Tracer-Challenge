@@ -12,38 +12,16 @@ namespace The_Ray_Tracer_Challenge
             W = w;
         }
 
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Z { get; set; }
-        public double W { get; set; }
+        public double X { get; }
+        public double Y { get; }
+        public double Z { get; }
+        public double W { get; }
 
-        public double Magnitude => this.Magnitude();
-
-        public static Tuple Point(double x, double y, double z)
-            => new Tuple(x, y, z, 1.0);
-
-        public static Tuple Vector(double x, double y, double z)
-            => new Tuple(x, y, z, 0.0);
-
-        public bool Equals(Tuple other)
-            => X == other.X
-                && Y == other.Y
-                && Z == other.Z
-                && W == other.W;
-
-        public override bool Equals(object obj)
-            => Equals((Tuple)obj);
-
-        public override int GetHashCode() => base.GetHashCode();
-
-        public static bool operator ==(Tuple a, Tuple b)
-            => a.Equals(b);
-
-        public static bool operator !=(Tuple a, Tuple b)
-            => !a.Equals(b);
+        public bool IsPoint => W == 1;
+        public bool IsVector => W == 0;
 
         public static Tuple operator +(Tuple a, Tuple b)
-            => a.Add(b);
+           => a.Add(b);
 
         public static Tuple operator -(Tuple a)
             => a.Negate();
@@ -56,5 +34,23 @@ namespace The_Ray_Tracer_Challenge
 
         public static Tuple operator /(Tuple a, double b)
             => a.DivideBy(b);
+
+        public static implicit operator Point(Tuple tuple)
+        {
+            if (tuple.IsPoint)
+            {
+                return new Point(tuple.X, tuple.Y, tuple.Z);
+            }
+            throw new System.NotSupportedException();
+        }
+
+        public static implicit operator Vector(Tuple tuple)
+        {
+            if (tuple.IsVector)
+            {
+                return new Vector(tuple.X, tuple.Y, tuple.Z);
+            }
+            throw new System.NotSupportedException();
+        }
     }
 }
