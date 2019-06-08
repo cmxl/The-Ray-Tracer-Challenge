@@ -25,5 +25,7 @@ namespace The_Ray_Tracer_Challenge
         public static bool operator !=(Point left, Point right) => !(left == right);
 
         public static implicit operator Tuple(Point point) => new Tuple(point.X, point.Y, point.Z, point.W);
+
+        public override string ToString() => $"Point({X}, {Y}, {Z})";
     }
 }

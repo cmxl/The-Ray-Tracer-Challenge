@@ -27,5 +27,7 @@ namespace The_Ray_Tracer_Challenge
         public static bool operator !=(Vector left, Vector right) => !(left == right);
 
         public static implicit operator Tuple(Vector vector) => new Tuple(vector.X, vector.Y, vector.Z, vector.W);
+
+        public override string ToString() => $"Vector({X}, {Y}, {Z})";
     }
 }

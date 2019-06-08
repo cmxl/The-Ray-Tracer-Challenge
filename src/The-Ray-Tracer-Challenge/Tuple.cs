@@ -52,5 +52,9 @@ namespace The_Ray_Tracer_Challenge
             }
             throw new System.NotSupportedException();
         }
+
+        public static implicit operator Color(Tuple tuple) => new Color(tuple.X, tuple.Y, tuple.Z);
+
+        public override string ToString() => $"Tuple({X},{Y},{Z},{W})";
     }
 }
