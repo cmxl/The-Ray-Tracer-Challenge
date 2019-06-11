@@ -7,8 +7,8 @@ namespace Projectile
     {
         private static void Main(string[] args)
         {
-            var environment = new ProjectileEnvironment(Tuple.Vector(0, -0.1, 0), Tuple.Vector(-0.01, 0, 0));
-            var projectile = new Projectile(Tuple.Point(0, 1, 0), Tuple.Vector(10, 15, 0).Normalize());
+            var environment = new ProjectileEnvironment(new Vector(0, -0.1, 0), new Vector(-0.01, 0, 0));
+            var projectile = new Projectile(new Point(0, 1, 0), new Vector(10, 15, 0).Normalize());
 
             while (projectile.Position.Y > 0)
             {
