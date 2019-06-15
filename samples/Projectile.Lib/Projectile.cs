@@ -1,6 +1,6 @@
 ﻿using The_Ray_Tracer_Challenge;
 
-namespace Projectile
+namespace Projectile.Lib
 {
     public class Projectile
     {

@@ -12,10 +12,18 @@
         public int Width => _canvas.GetLength(0);
         public int Height => _canvas.GetLength(1);
 
-        public void WritePixel(int x, int y, Color color) 
-            => _canvas[x, y] = color;
+        public void WritePixel(int x, int y, Color color)
+        {
+            if (x >= Width || x < 0)
+                return;
 
-        public Color PixelAt(int x, int y) 
+            if (y >= Height || y < 0)
+                return;
+
+            _canvas[x, y] = color;
+        }
+
+        public Color PixelAt(int x, int y)
             => _canvas[x, y];
     }
 }

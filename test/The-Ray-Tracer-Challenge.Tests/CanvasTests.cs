@@ -1,8 +1,8 @@
 ﻿using NooBIT.Asserts;
 using System.IO;
+using The_Ray_Tracer_Challenge.Constants;
 using The_Ray_Tracer_Challenge.ImageFormatters;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace The_Ray_Tracer_Challenge.Tests
 {
@@ -17,7 +17,7 @@ namespace The_Ray_Tracer_Challenge.Tests
 
             for (var i = 0; i < canvas.Width; i++)
                 for (var j = 0; j < canvas.Height; j++)
-                    canvas.PixelAt(i, j).Should().Equal(Color.Black);
+                    canvas.PixelAt(i, j).Should().Equal(Colors.Black);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace The_Ray_Tracer_Challenge.Tests
             for (var i = 0; i < canvas.Width; i++)
                 for (var j = 0; j < canvas.Height; j++)
                     canvas.WritePixel(i, j, color);
-            
+
 
             var formatter = new PPMImageFormatter();
             var image = formatter.CreateImage(canvas);
@@ -89,13 +89,13 @@ namespace The_Ray_Tracer_Challenge.Tests
                 // real data
                 var content = sr.ReadToEnd();
 
-                var expected = 
+                var expected =
                     @"255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
 153 255 204 153 255 204 153 255 204 153 255 204 153
 255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
 153 255 204 153 255 204 153 255 204 153 255 204 153
 ";
-                
+
                 content.Should().Equal(expected);
             }
         }

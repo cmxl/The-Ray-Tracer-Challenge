@@ -1,19 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{79656D5A-77B0-4285-99C8-C709F2A5AC03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The-Ray-Tracer-Challenge", "src\The-Ray-Tracer-Challenge\The-Ray-Tracer-Challenge.csproj", "{DF96338D-E42D-4BCD-9A29-69BF098E32D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "The-Ray-Tracer-Challenge", "src\The-Ray-Tracer-Challenge\The-Ray-Tracer-Challenge.csproj", "{DF96338D-E42D-4BCD-9A29-69BF098E32D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8404FD8F-DFB6-4C3F-99B5-D8054DA80626}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The-Ray-Tracer-Challenge.Tests", "test\The-Ray-Tracer-Challenge.Tests\The-Ray-Tracer-Challenge.Tests.csproj", "{51837C36-746C-4B34-909D-09E888A1E3F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "The-Ray-Tracer-Challenge.Tests", "test\The-Ray-Tracer-Challenge.Tests\The-Ray-Tracer-Challenge.Tests.csproj", "{51837C36-746C-4B34-909D-09E888A1E3F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{83E42C35-B877-44D5-BF52-127BF41623AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projectile", "samples\Projectile\Projectile.csproj", "{5826D25C-EEFA-4D4D-B6E5-2AA902E9CABE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projectile", "samples\Projectile\Projectile.csproj", "{5826D25C-EEFA-4D4D-B6E5-2AA902E9CABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projectile-Plotting", "samples\Projectile-Plotting\Projectile-Plotting.csproj", "{12749CEA-CED8-44FC-9120-19EF990F140B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projectile.Lib", "samples\Projectile.Lib\Projectile.Lib.csproj", "{3399361D-36C5-43C1-9E3B-BF624D99B1B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,9 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DF96338D-E42D-4BCD-9A29-69BF098E32D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -64,10 +65,42 @@ Global
 		{5826D25C-EEFA-4D4D-B6E5-2AA902E9CABE}.Release|x64.Build.0 = Release|Any CPU
 		{5826D25C-EEFA-4D4D-B6E5-2AA902E9CABE}.Release|x86.ActiveCfg = Release|Any CPU
 		{5826D25C-EEFA-4D4D-B6E5-2AA902E9CABE}.Release|x86.Build.0 = Release|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Debug|x64.Build.0 = Debug|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Debug|x86.Build.0 = Debug|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Release|x64.ActiveCfg = Release|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Release|x64.Build.0 = Release|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Release|x86.ActiveCfg = Release|Any CPU
+		{12749CEA-CED8-44FC-9120-19EF990F140B}.Release|x86.Build.0 = Release|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Debug|x64.Build.0 = Debug|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Debug|x86.Build.0 = Debug|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Release|x64.ActiveCfg = Release|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Release|x64.Build.0 = Release|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Release|x86.ActiveCfg = Release|Any CPU
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DF96338D-E42D-4BCD-9A29-69BF098E32D0} = {79656D5A-77B0-4285-99C8-C709F2A5AC03}
 		{51837C36-746C-4B34-909D-09E888A1E3F8} = {8404FD8F-DFB6-4C3F-99B5-D8054DA80626}
 		{5826D25C-EEFA-4D4D-B6E5-2AA902E9CABE} = {83E42C35-B877-44D5-BF52-127BF41623AC}
+		{12749CEA-CED8-44FC-9120-19EF990F140B} = {83E42C35-B877-44D5-BF52-127BF41623AC}
+		{3399361D-36C5-43C1-9E3B-BF624D99B1B1} = {83E42C35-B877-44D5-BF52-127BF41623AC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8DDE0EC-18F8-477E-9359-990D56E25165}
 	EndGlobalSection
 EndGlobal
