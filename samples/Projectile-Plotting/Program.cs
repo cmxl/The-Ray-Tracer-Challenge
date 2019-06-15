@@ -33,8 +33,8 @@ namespace Projectile_Plotting
             }
 
             var formatter = new PPMImageFormatter();
-            var content = formatter.CreateImage(canvas);
-            File.WriteAllText("projectile.ppm", content);
+            var image = (PPMImage)formatter.CreateImage(canvas);
+            File.WriteAllText("projectile.ppm", image.Content);
 
             Process.Start("explorer", "projectile.ppm");
             System.Console.WriteLine("Done");

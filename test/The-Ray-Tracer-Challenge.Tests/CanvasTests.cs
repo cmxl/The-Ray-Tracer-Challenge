@@ -25,8 +25,8 @@ namespace The_Ray_Tracer_Challenge.Tests
         {
             var canvas = new Canvas(5, 3);
             var formatter = new PPMImageFormatter();
-            var image = formatter.CreateImage(canvas);
-            using (var sr = new StringReader(image))
+            var image = (PPMImage)formatter.CreateImage(canvas);
+            using (var sr = new StringReader(image.Content))
             {
                 sr.ReadLine().Should().Equal("P3");
                 sr.ReadLine().Should().Equal("5 3");
@@ -47,8 +47,8 @@ namespace The_Ray_Tracer_Challenge.Tests
             canvas.WritePixel(4, 2, c3);
 
             var formatter = new PPMImageFormatter();
-            var image = formatter.CreateImage(canvas);
-            using (var sr = new StringReader(image))
+            var image = (PPMImage)formatter.CreateImage(canvas);
+            using (var sr = new StringReader(image.Content))
             {
                 // omit header
                 sr.ReadLine();
@@ -78,8 +78,8 @@ namespace The_Ray_Tracer_Challenge.Tests
 
 
             var formatter = new PPMImageFormatter();
-            var image = formatter.CreateImage(canvas);
-            using (var sr = new StringReader(image))
+            var image = (PPMImage)formatter.CreateImage(canvas);
+            using (var sr = new StringReader(image.Content))
             {
                 // omit header
                 sr.ReadLine();
@@ -105,9 +105,12 @@ namespace The_Ray_Tracer_Challenge.Tests
         {
             var canvas = new Canvas(5, 3);
             var formatter = new PPMImageFormatter();
-            var image = formatter.CreateImage(canvas);
-
-            image[image.Length - 1].Should().Equal('\n');
+            var image = (PPMImage)formatter.CreateImage(canvas);
+            using (var sr = new StringReader(image.Content))
+            {
+                var content = sr.ReadToEnd();
+                content[content.Length - 1].Should().Equal('\n');
+            }
         }
     }
 }

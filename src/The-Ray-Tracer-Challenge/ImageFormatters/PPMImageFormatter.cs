@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using The_Ray_Tracer_Challenge.Constants;
 using The_Ray_Tracer_Challenge.Extensions;
 
 namespace The_Ray_Tracer_Challenge.ImageFormatters
@@ -7,15 +8,16 @@ namespace The_Ray_Tracer_Challenge.ImageFormatters
     public class PPMImageFormatter : IImageFormatter
     {
         private static readonly string _identifier = "P3";
-        private static readonly int _maximumColorValue = 255;
+        private static readonly int _maximumColorValue = ValueRanges.Rgb.Max;
         private static readonly int _maximumCharactersPerLine = 70;
         private static readonly string _newLine = Environment.NewLine;
 
-        public string CreateImage(Canvas canvas)
+        public IImage CreateImage(Canvas canvas)
         {
             var header = WriteHeader(canvas.Width, canvas.Height);
             var content = WriteContent(canvas);
-            return string.Join(_newLine, new[] { header, content }) + _newLine;
+            var image = string.Join(_newLine, new[] { header, content }) + _newLine;
+            return new PPMImage(image);
         }
 
         private string WriteHeader(int width, int height)
@@ -48,10 +50,10 @@ namespace The_Ray_Tracer_Challenge.ImageFormatters
             if (line.Length <= _maximumCharactersPerLine)
                 return line;
 
-            return ClampLine(line, _maximumCharactersPerLine, _maximumColorValue.ToString().Length);
+            return WrapLine(line, _maximumCharactersPerLine, _maximumColorValue.ToString().Length);
         }
 
-        private string ClampLine(string line, int maxLength, int componentLength)
+        private string WrapLine(string line, int maxLength, int componentLength)
         {
             var lines = new List<string>();
             while (line.Length > maxLength)
@@ -66,6 +68,10 @@ namespace The_Ray_Tracer_Challenge.ImageFormatters
         }
 
         private int[] ColorToRgbArray(Color color)
-            => new[] { color.Red.Clamp(), color.Green.Clamp(), color.Blue.Clamp() };
+            => new[] {
+                color.Red.Multiply(ValueRanges.Rgb.Max).Round().Clamp(ValueRanges.Rgb.Min, ValueRanges.Rgb.Max),
+                color.Green.Multiply(ValueRanges.Rgb.Max).Round().Clamp(ValueRanges.Rgb.Min, ValueRanges.Rgb.Max),
+                color.Blue.Multiply(ValueRanges.Rgb.Max).Round().Clamp(ValueRanges.Rgb.Min, ValueRanges.Rgb.Max)
+            };
     }
 }

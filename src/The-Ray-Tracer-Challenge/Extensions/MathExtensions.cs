@@ -8,17 +8,25 @@ namespace The_Ray_Tracer_Challenge.Extensions
 
         public static double SquareRoot(this double x) => Math.Sqrt(x);
 
-        public static int Clamp(this double value, int minValue = 0, int maxValue = 255)
-        {
-            var rgb = (int)Math.Ceiling(maxValue * value);
+        public static double Multiply(this double x, double factor)
+            => x * factor;
 
-            if (rgb > maxValue)
+        public static int Round(this double x)
+            => (int)Math.Round(x);
+
+
+        public static int Clamp(this double value, int minValue, int maxValue)
+            => Clamp(value, minValue, maxValue);
+
+        public static int Clamp(this int value, int minValue, int maxValue)
+        {
+            if (value > maxValue)
                 return maxValue;
 
-            if (rgb < minValue)
+            if (value < minValue)
                 return minValue;
 
-            return rgb;
+            return value;
         }
     }
 }

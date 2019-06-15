@@ -2,6 +2,6 @@
 {
     public interface IImageFormatter
     {
-        string CreateImage(Canvas canvas);
+        IImage CreateImage(Canvas canvas);
     }
 }
