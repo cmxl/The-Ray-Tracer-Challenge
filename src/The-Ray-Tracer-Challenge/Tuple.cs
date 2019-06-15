@@ -55,6 +55,13 @@ namespace The_Ray_Tracer_Challenge
 
         public static implicit operator Color(Tuple tuple) => new Color(tuple.X, tuple.Y, tuple.Z);
 
+        public static implicit operator Matrix(Tuple tuple) => new Matrix(new double[4, 1] {
+            { tuple.X },
+            { tuple.Y },
+            { tuple.Z },
+            { tuple.W }
+        });
+
         public override string ToString() => $"Tuple({X},{Y},{Z},{W})";
     }
 }

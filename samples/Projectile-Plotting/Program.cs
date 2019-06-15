@@ -26,8 +26,6 @@ namespace Projectile_Plotting
             {
                 var x = (int)projectile.Position.X;
                 var y = (int)(canvas.Height - projectile.Position.Y);
-
-                //canvas.WritePixel(x, y, Colors.Green);
                 canvas.WritePixel(x, y, Colors.Green);
                 projectile = RenderCycle.Tick(environment, projectile);
             }
