@@ -1,4 +1,5 @@
 ﻿using System;
+using The_Ray_Tracer_Challenge.Constants;
 using The_Ray_Tracer_Challenge.Extensions;
 
 namespace The_Ray_Tracer_Challenge
@@ -19,7 +20,12 @@ namespace The_Ray_Tracer_Challenge
         public double W { get; }
 
         public override bool Equals(object obj) => Equals((Point)obj);
-        public bool Equals(Point other) => X == other.X && Y == other.Y && Z == other.Z && W == other.W;
+        public bool Equals(Point other)
+            => X.Equals(other.X, MathConstants.DELTA) &&
+               Y.Equals(other.Y, MathConstants.DELTA) &&
+               Z.Equals(other.Z, MathConstants.DELTA) &&
+               W.Equals(other.W, MathConstants.DELTA);
+
         public override int GetHashCode() => HashCode.Combine(X, Y, Z, W);
         public static bool operator ==(Point left, Point right) => left.Equals(right);
         public static bool operator !=(Point left, Point right) => !(left == right);

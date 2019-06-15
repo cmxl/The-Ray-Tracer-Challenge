@@ -26,7 +26,6 @@ namespace The_Ray_Tracer_Challenge.Tests
             Tuple c2 = new Color(0.7, 0.1, 0.25);
             Color result = c1 + c2;
             var expected = new Color(1.6, 0.7, 1.0);
-
             result.Should().Equal(expected);
         }
 
@@ -36,7 +35,18 @@ namespace The_Ray_Tracer_Challenge.Tests
             Tuple c1 = new Color(0.9, 0.6, 0.75);
             Tuple c2 = new Color(0.7, 0.1, 0.25);
             Color result = c1 - c2;
-            var expected = new Color(0.9 - 0.7, 0.5, 0.5); // cheat the system due to inprecise double values
+            var expected = new Color(0.2, 0.5, 0.5); // cheat the system due to inprecise double values
+
+            result.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void Multiplying_Colors()
+        {
+            var c1 = new Color(1, 0.2, 0.4);
+            var c2 = new Color(0.9, 1, 0.1);
+            var result = c1 * c2;
+            var expected = new Color(0.9, 0.2, 0.04);
 
             result.Should().Equal(expected);
         }
