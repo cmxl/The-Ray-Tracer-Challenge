@@ -6,6 +6,8 @@ namespace The_Ray_Tracer_Challenge
 {
     public struct Color : IEquatable<Color>
     {
+        public static readonly Color Black = new Color(0, 0, 0);
+
         public Color(double red, double green, double blue)
         {
             Red = red;
