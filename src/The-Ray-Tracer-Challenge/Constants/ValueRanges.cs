@@ -16,5 +16,4 @@
         public T Min { get; }
         public T Max { get; }
     }
-
 }

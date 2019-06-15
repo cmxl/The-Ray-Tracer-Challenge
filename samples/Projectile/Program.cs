@@ -21,7 +21,5 @@ namespace Projectile
             System.Console.WriteLine("Done");
             System.Console.ReadLine();
         }
-
-        
     }
 }

@@ -28,9 +28,6 @@ namespace The_Ray_Tracer_Challenge
             set => _matrix[x, y] = value;
         }
 
-        public override bool Equals(object obj)
-            => obj is Matrix matrix && Equals(matrix);
-
         public bool Equals(Matrix other)
         {
             var matrix = _matrix;
@@ -39,18 +36,12 @@ namespace The_Ray_Tracer_Challenge
                  matrix.Cast<double>().SequenceEqual(other._matrix.Cast<double>());
         }
 
-        public override int GetHashCode()
-            => HashCode.Combine(_matrix);
+        public override bool Equals(object obj) => obj is Matrix matrix && Equals(matrix);
+        public override int GetHashCode() => HashCode.Combine(_matrix);
         public IEnumerator GetEnumerator() => _matrix.GetEnumerator();
-
-        public static bool operator ==(Matrix a, Matrix b)
-            => a.Equals(b);
-
-        public static bool operator !=(Matrix a, Matrix b)
-            => !a.Equals(b);
-
-        public static Matrix operator *(Matrix a, Matrix b)
-            => a.MultiplyBy(b);
+        public static bool operator ==(Matrix a, Matrix b) => a.Equals(b);
+        public static bool operator !=(Matrix a, Matrix b) => !a.Equals(b);
+        public static Matrix operator *(Matrix a, Matrix b) => a.MultiplyBy(b);
 
         public static implicit operator Tuple(Matrix matrix)
         {
@@ -61,7 +52,7 @@ namespace The_Ray_Tracer_Challenge
                      matrix[2, 0],
                      matrix[3, 0]
                 );
-            throw new NotSupportedException();
+            throw new NotSupportedException($"A matrix with dimensions [{matrix.Rows},{matrix.Columns}] is not a Tuple!");
         }
 
         public static Matrix IdentityMatrix(int dimension)

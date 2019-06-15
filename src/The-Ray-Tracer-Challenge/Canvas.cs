@@ -9,21 +9,22 @@
             _canvas = new Color[width, height];
         }
 
-        public int Width => _canvas.GetLength(0);
-        public int Height => _canvas.GetLength(1);
-
-        public void WritePixel(int x, int y, Color color)
+        public Color this[int x, int y]
         {
-            if (x >= Width || x < 0)
-                return;
+            get => _canvas[x, y];
+            set
+            {
+                if (x >= Width || x < 0)
+                    return;
 
-            if (y >= Height || y < 0)
-                return;
+                if (y >= Height || y < 0)
+                    return;
 
-            _canvas[x, y] = color;
+                _canvas[x, y] = value;
+            }
         }
 
-        public Color PixelAt(int x, int y)
-            => _canvas[x, y];
+        public int Width => _canvas.GetLength(0);
+        public int Height => _canvas.GetLength(1);
     }
 }

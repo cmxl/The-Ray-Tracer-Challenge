@@ -17,7 +17,7 @@ namespace The_Ray_Tracer_Challenge.Tests
 
             for (var i = 0; i < canvas.Width; i++)
                 for (var j = 0; j < canvas.Height; j++)
-                    canvas.PixelAt(i, j).Should().Equal(Colors.Black);
+                    canvas[i, j].Should().Equal(Colors.Black);
         }
 
         [Fact]
@@ -42,9 +42,9 @@ namespace The_Ray_Tracer_Challenge.Tests
             var c2 = new Color(0, 0.5, 0);
             var c3 = new Color(-0.5, 0, 1);
 
-            canvas.WritePixel(0, 0, c1);
-            canvas.WritePixel(2, 1, c2);
-            canvas.WritePixel(4, 2, c3);
+            canvas[0, 0] = c1;
+            canvas[2, 1] = c2;
+            canvas[4, 2] = c3;
 
             var formatter = new PPMImageFormatter();
             var image = (PPMImage)formatter.CreateImage(canvas);
@@ -74,7 +74,7 @@ namespace The_Ray_Tracer_Challenge.Tests
 
             for (var i = 0; i < canvas.Width; i++)
                 for (var j = 0; j < canvas.Height; j++)
-                    canvas.WritePixel(i, j, color);
+                    canvas[i, j] = color;
 
 
             var formatter = new PPMImageFormatter();

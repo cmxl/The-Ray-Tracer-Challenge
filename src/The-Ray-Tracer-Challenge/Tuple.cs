@@ -20,20 +20,15 @@ namespace The_Ray_Tracer_Challenge
         public bool IsPoint => W == 1;
         public bool IsVector => W == 0;
 
-        public static Tuple operator +(Tuple a, Tuple b)
-           => a.Add(b);
+        public override string ToString() => $"Tuple({X},{Y},{Z},{W})";
 
-        public static Tuple operator -(Tuple a)
-            => a.Negate();
-
-        public static Tuple operator -(Tuple a, Tuple b)
-            => a.Subtract(b);
-
-        public static Tuple operator *(Tuple a, double b)
-            => a.MultiplyBy(b);
-
-        public static Tuple operator /(Tuple a, double b)
-            => a.DivideBy(b);
+        public static Tuple operator +(Tuple a, Tuple b) => a.Add(b);
+        public static Tuple operator -(Tuple a) => a.Negate();
+        public static Tuple operator -(Tuple a, Tuple b) => a.Subtract(b);
+        public static Tuple operator *(Tuple a, double b) => a.MultiplyBy(b);
+        public static Tuple operator /(Tuple a, double b) => a.DivideBy(b);
+        
+        public static implicit operator Color(Tuple tuple) => new Color(tuple.X, tuple.Y, tuple.Z);
 
         public static implicit operator Point(Tuple tuple)
         {
@@ -53,15 +48,11 @@ namespace The_Ray_Tracer_Challenge
             throw new System.NotSupportedException();
         }
 
-        public static implicit operator Color(Tuple tuple) => new Color(tuple.X, tuple.Y, tuple.Z);
-
         public static implicit operator Matrix(Tuple tuple) => new Matrix(new double[4, 1] {
             { tuple.X },
             { tuple.Y },
             { tuple.Z },
             { tuple.W }
         });
-
-        public override string ToString() => $"Tuple({X},{Y},{Z},{W})";
     }
 }

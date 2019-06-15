@@ -16,7 +16,7 @@ namespace The_Ray_Tracer_Challenge.Extensions
                     double value = 0;
                     for (var dim = 0; dim < b.Rows; dim++)
                         value += a[row, dim] * b[dim, column];
-                    
+
                     result[row, column] = value;
                 }
             return result;

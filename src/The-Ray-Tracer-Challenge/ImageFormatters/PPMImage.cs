@@ -27,7 +27,9 @@ namespace The_Ray_Tracer_Challenge.ImageFormatters
                 var bytes = ms.ToArray();
                 content = Encoding.Unicode.GetString(bytes);
             }
-            return new PPMImage(content);
+            // streams do contain the string terminater
+            // we do not care about it and remove it
+            return new PPMImage(content.Trim('\0'));
         }
     }
 }

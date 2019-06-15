@@ -42,7 +42,7 @@ namespace The_Ray_Tracer_Challenge.ImageFormatters
             var colorComponents = new List<int>();
             for (var x = 0; x < canvas.Width; x++)
             {
-                var color = canvas.PixelAt(x, y);
+                var color = canvas[x, y];
                 colorComponents.AddRange(ColorToRgbArray(color));
             }
 

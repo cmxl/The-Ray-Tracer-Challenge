@@ -1,5 +1,4 @@
 ﻿using NooBIT.Asserts;
-using System.Collections;
 using Xunit;
 
 namespace The_Ray_Tracer_Challenge.Tests
@@ -159,7 +158,7 @@ namespace The_Ray_Tracer_Challenge.Tests
                 { 2, 4,  8, 16 },
                 { 4, 8, 16, 32 }
             });
-            
+
             var result = a * Matrix.IdentityMatrix(4);
             result.Should().Equal(a);
         }
