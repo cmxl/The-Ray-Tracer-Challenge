@@ -21,5 +21,14 @@ namespace The_Ray_Tracer_Challenge.Extensions
                 }
             return result;
         }
+
+        public static Matrix Transpose(this Matrix matrix)
+        {
+            var transposed = new Matrix(matrix.Columns, matrix.Rows);
+            for (var row = 0; row < matrix.Rows; row++)
+                for (var column = 0; column < matrix.Columns; column++)
+                    transposed[column, row] = matrix[row, column];
+            return transposed;
+        }
     }
 }

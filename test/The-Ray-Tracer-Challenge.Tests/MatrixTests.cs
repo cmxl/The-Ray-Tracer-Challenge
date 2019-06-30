@@ -1,4 +1,5 @@
 ﻿using NooBIT.Asserts;
+using The_Ray_Tracer_Challenge.Extensions;
 using Xunit;
 
 namespace The_Ray_Tracer_Challenge.Tests
@@ -169,6 +170,36 @@ namespace The_Ray_Tracer_Challenge.Tests
             var a = new Tuple(1, 2, 3, 4);
             var result = Matrix.IdentityMatrix(4) * a;
             result.Should().Equal(a);
+        }
+
+        [Fact]
+        public void Transposing_A_Matrix()
+        {
+            var a = new Matrix(new double[4, 4]
+            {
+                { 0, 9, 3, 0 },
+                { 9, 8, 0, 8 },
+                { 1, 8, 5, 3 },
+                { 0, 0, 5, 8 }
+            });
+
+            var expected = new Matrix(new double[4, 4]
+            {
+                { 0, 9, 1, 0 },
+                { 9, 8, 8, 0 },
+                { 3, 0, 5, 5 },
+                { 0, 8, 3, 8 }
+            });
+
+            var result = a.Transpose();
+            result.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void Transposing_The_IdentityMatrix()
+        {
+            var identity = Matrix.IdentityMatrix(4);
+            identity.Transpose().Should().Equal(identity);
         }
     }
 }
