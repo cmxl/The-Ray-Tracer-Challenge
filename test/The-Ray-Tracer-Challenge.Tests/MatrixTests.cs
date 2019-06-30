@@ -201,5 +201,129 @@ namespace The_Ray_Tracer_Challenge.Tests
             var identity = Matrix.IdentityMatrix(4);
             identity.Transpose().Should().Equal(identity);
         }
+
+        [Fact]
+        public void Calculating_Determinant_Of_2x2_Matrix()
+        {
+            var a = new Matrix(new double[2, 2]
+            {
+                {  1, 5 },
+                { -3, 2 }
+            });
+
+            var determinant = a.Determinant();
+            determinant.Should().Equal(17);
+        }
+
+        [Fact]
+        public void Submatrix_Of_3x3_Matrix_Is_2x2_Matrix()
+        {
+            var matrix = new Matrix(new double[3, 3]
+            {
+                {  1, 5,  0 },
+                { -3, 2,  7 },
+                {  0, 6, -3 }
+            });
+
+            var submatrix = matrix.SubMatrix(0, 2);
+
+            var expected = new Matrix(new double[2, 2]
+            {
+                { -3, 2 },
+                {  0, 6 }
+            });
+
+            submatrix.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void Submatrix_Of_4x4_Matrix_Is_3x3_Matrix()
+        {
+            var matrix = new Matrix(new double[4, 4]
+            {
+                { -6, 1,  1, 6 },
+                { -8, 5,  8, 6 },
+                { -1, 0,  8, 2 },
+                { -7, 1, -1, 1 }
+            });
+
+            var submatrix = matrix.SubMatrix(2, 1);
+
+            var expected = new Matrix(new double[3, 3]
+            {
+                { -6,  1, 6 },
+                { -8,  8, 6 },
+                { -7, -1, 1 }
+            });
+
+            submatrix.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void Caclulating_A_Minor_Of_3x3_Matrix()
+        {
+            var matrix = new Matrix(new double[3, 3]
+            {
+                { 3,  5,  0 },
+                { 2, -1, -7 },
+                { 6, -1,  5 }
+            });
+
+            var submatrix = matrix.SubMatrix(1, 0);
+            var determinant = submatrix.Determinant();
+            var minor = matrix.Minor(1, 0);
+
+            determinant.Should().Equal(minor);
+            determinant.Should().Equal(25);
+        }
+
+        [Fact]
+        public void Caclulating_A_Cofactor_Of_3x3_Matrix()
+        {
+            var matrix = new Matrix(new double[3, 3]
+            {
+                { 3,  5,  0 },
+                { 2, -1, -7 },
+                { 6, -1,  5 }
+            });
+
+            matrix.Minor(0, 0).Should().Equal(matrix.Cofactor(0, 0)).And.Equal(-12);
+            matrix.Minor(1, 0).Should().Equal(-matrix.Cofactor(1, 0)).And.Equal(25);
+        }
+
+        [Fact]
+        public void Caclulating_The_Determinant_Of_3x3_Matrix()
+        {
+            var matrix = new Matrix(new double[3, 3]
+            {
+                {  1, 2,  6 },
+                { -5, 8, -4 },
+                {  2, 6,  4 }
+            });
+
+            matrix.Cofactor(0, 0).Should().Equal(56);
+            matrix.Cofactor(0, 1).Should().Equal(12);
+            matrix.Cofactor(0, 2).Should().Equal(-46);
+            matrix.Determinant().Should().Equal(-196);
+        }
+
+        [Fact]
+        public void Caclulating_The_Determinant_Of_4x4_Matrix()
+        {
+            var matrix = new Matrix(new double[4, 4]
+            {
+                { -2, -8,  3,  5 },
+                { -3,  1,  7,  3 },
+                {  1,  2, -9,  6 },
+                { -6,  7,  7, -9 }
+            });
+
+            matrix.Cofactor(0, 0).Should().Equal(690);
+            matrix.Cofactor(0, 1).Should().Equal(447);
+            matrix.Cofactor(0, 2).Should().Equal(210);
+            matrix.Cofactor(0, 3).Should().Equal(51);
+            matrix.Determinant().Should().Equal(-4071);
+        }
     }
 }
+

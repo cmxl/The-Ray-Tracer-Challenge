@@ -21,6 +21,8 @@ namespace The_Ray_Tracer_Challenge
 
         public int Rows => _matrix.GetLength(0);
         public int Columns => _matrix.GetLength(1);
+        public (int x, int y) Dimension => (x: Rows, y: Columns);
+        public bool IsQuadratic => Rows == Columns;
 
         public double this[int x, int y]
         {
