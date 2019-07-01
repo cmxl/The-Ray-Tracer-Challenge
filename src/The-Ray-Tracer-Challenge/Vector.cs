@@ -1,4 +1,5 @@
 ﻿using System;
+using The_Ray_Tracer_Challenge.Comparisson;
 using The_Ray_Tracer_Challenge.Constants;
 using The_Ray_Tracer_Challenge.Extensions;
 
@@ -22,10 +23,10 @@ namespace The_Ray_Tracer_Challenge
         public double Magnitude => this.Magnitude();
 
         public bool Equals(Vector other)
-            => X.Equals(other.X, MathConstants.DELTA) &&
-               Y.Equals(other.Y, MathConstants.DELTA) &&
-               Z.Equals(other.Z, MathConstants.DELTA) &&
-               W.Equals(other.W, MathConstants.DELTA);
+            => DoubleEqualityComparer.Default.Equals(X, other.X) &&
+               DoubleEqualityComparer.Default.Equals(Y, other.Y) &&
+               DoubleEqualityComparer.Default.Equals(Z, other.Z) &&
+               DoubleEqualityComparer.Default.Equals(W, other.W);
 
         public override bool Equals(object obj) => Equals((Vector)obj);
         public override int GetHashCode() => HashCode.Combine(X, Y, Z, W);

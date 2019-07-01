@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using The_Ray_Tracer_Challenge.Comparisson;
+using The_Ray_Tracer_Challenge.Constants;
 using The_Ray_Tracer_Challenge.Extensions;
 
 namespace The_Ray_Tracer_Challenge
@@ -33,9 +35,15 @@ namespace The_Ray_Tracer_Challenge
         public bool Equals(Matrix other)
         {
             var matrix = _matrix;
-            return matrix.Rank == other._matrix.Rank &&
-                 Enumerable.Range(0, matrix.Rank).All(dimension => matrix.GetLength(dimension) == other._matrix.GetLength(dimension)) &&
-                 matrix.Cast<double>().SequenceEqual(other._matrix.Cast<double>());
+
+            var sameRank = matrix.Rank == other._matrix.Rank;
+            var sameDimension = Enumerable.Range(0, matrix.Rank).All(dimension => matrix.GetLength(dimension) == other._matrix.GetLength(dimension));
+
+            var sequence = matrix.Cast<double>();
+            var otherSequence = other.Cast<double>();
+            var sequenceEqual = sequence.SequenceEqual(otherSequence, DoubleEqualityComparer.Default);
+
+            return sameRank && sameDimension && sequenceEqual;
         }
 
         public override bool Equals(object obj) => obj is Matrix matrix && Equals(matrix);
@@ -44,6 +52,19 @@ namespace The_Ray_Tracer_Challenge
         public static bool operator ==(Matrix a, Matrix b) => a.Equals(b);
         public static bool operator !=(Matrix a, Matrix b) => !a.Equals(b);
         public static Matrix operator *(Matrix a, Matrix b) => a.MultiplyBy(b);
+
+        public static Matrix operator *(Matrix a, double factor)
+        {
+            var result = a;
+            for (var row = 0; row < result.Rows; row++)
+                for (var column = 0; column < result.Columns; column++)
+                    result[row, column] *= factor;
+
+            return result;
+        }
+
+        public static Matrix operator /(Matrix a, double quotient) 
+            => a * (1 / quotient);
 
         public static implicit operator Tuple(Matrix matrix)
         {

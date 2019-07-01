@@ -1,4 +1,5 @@
 ﻿using System;
+using The_Ray_Tracer_Challenge.Comparisson;
 using The_Ray_Tracer_Challenge.Constants;
 using The_Ray_Tracer_Challenge.Extensions;
 
@@ -26,9 +27,9 @@ namespace The_Ray_Tracer_Challenge
         public override int GetHashCode() => HashCode.Combine(Red, Green, Blue);
 
         public bool Equals(Color other)
-            => Red.Equals(other.Red, MathConstants.DELTA) &&
-               Green.Equals(other.Green, MathConstants.DELTA) &&
-               Blue.Equals(other.Blue, MathConstants.DELTA);
+            => DoubleEqualityComparer.Default.Equals(Red, other.Red) &&
+               DoubleEqualityComparer.Default.Equals(Green, other.Green) &&
+               DoubleEqualityComparer.Default.Equals(Blue, other.Blue);
 
         
     }

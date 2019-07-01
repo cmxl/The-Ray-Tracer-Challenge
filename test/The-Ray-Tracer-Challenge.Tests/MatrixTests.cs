@@ -1,6 +1,10 @@
 ﻿using NooBIT.Asserts;
 using The_Ray_Tracer_Challenge.Extensions;
+using The_Ray_Tracer_Challenge.Comparisson;
 using Xunit;
+using The_Ray_Tracer_Challenge.Constants;
+using System.Linq;
+using System;
 
 namespace The_Ray_Tracer_Challenge.Tests
 {
@@ -324,6 +328,68 @@ namespace The_Ray_Tracer_Challenge.Tests
             matrix.Cofactor(0, 3).Should().Equal(51);
             matrix.Determinant().Should().Equal(-4071);
         }
+
+        [Fact]
+        public void Is_Matrix_Invertible()
+        {
+            var matrix = new Matrix(new double[4, 4]
+            {
+                { 6,  4, 4,  4 },
+                { 5,  5, 7,  6 },
+                { 4, -9, 3, -7 },
+                { 9,  1, 7, -6 }
+            });
+
+            matrix.Determinant().Should().Equal(-2120);
+            matrix.IsInvertible().Should().Equal(true);
+        }
+
+        [Fact]
+        public void Is_Matrix_Not_Invertible()
+        {
+            var matrix = new Matrix(new double[4, 4]
+            {
+                { -4,  2, -2, -3 },
+                {  9,  6,  2,  6 },
+                {  0, -5,  1, -5 },
+                {  0,  0,  0,  0 }
+            });
+
+            matrix.Determinant().Should().Equal(0);
+            matrix.IsInvertible().Should().Equal(false);
+        }
+
+        [Fact]
+        public void Calculating_Inverse_Of_Matrix()
+        {
+            var matrix = new Matrix(new double[4, 4]
+            {
+                { -5,  2,  6, -8 },
+                {  1, -5,  1,  8 },
+                {  7,  7, -6, -7 },
+                {  1, -3,  7,  4 }
+            });
+
+            var inverse = new Matrix(new double[4, 4]
+            {
+                {  0.21805,  0.45113,  0.24060, -0.04511 },
+                { -0.80827, -1.45677, -0.44361,  0.52068 },
+                { -0.07895, -0.22368, -0.05263,  0.19737 },
+                { -0.52256, -0.81391, -0.30075,  0.30639 }
+            });
+
+            matrix.Determinant().Should().Equal(532);
+            matrix.Cofactor(2, 3).Should().Equal(-160);
+            matrix.Cofactor(3, 2).Should().Equal(105);
+
+            var b = matrix.Invert();
+
+            DoubleEqualityComparer.Default.Equals(b[3, 2], -160d / 532d).Should().Be.True();
+            DoubleEqualityComparer.Default.Equals(b[2, 3], 105d / 532d).Should().Be.True();
+
+            b.Should().Equal(inverse);
+        }
     }
 }
+
 

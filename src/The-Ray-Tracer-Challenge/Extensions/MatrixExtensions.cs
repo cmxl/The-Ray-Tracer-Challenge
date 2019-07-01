@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using The_Ray_Tracer_Challenge.Comparisson;
+using The_Ray_Tracer_Challenge.Constants;
 
 namespace The_Ray_Tracer_Challenge.Extensions
 {
@@ -83,5 +85,21 @@ namespace The_Ray_Tracer_Challenge.Extensions
 
         public static double Cofactor(this Matrix matrix, int row, int column) 
             => (row + column) % 2 == 0 ? matrix.Minor(row, column) : -matrix.Minor(row, column);
+
+        public static bool IsInvertible(this Matrix matrix)
+            => matrix.Determinant() != 0;
+
+        public static Matrix Invert(this Matrix matrix)
+        {
+            if (!matrix.IsInvertible())
+                throw new InvalidOperationException("Cannot invert the given matrix. Determinant is zero.");
+
+            var inverse = new Matrix(matrix.Rows, matrix.Columns);
+            for (var row = 0; row < inverse.Rows; row++)
+                for (var column = 0; column < inverse.Columns; column++)
+                    inverse[column, row] = matrix.Cofactor(row, column) / matrix.Determinant();
+
+            return inverse;
+        }
     }
 }
