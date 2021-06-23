@@ -1,10 +1,7 @@
 ﻿using NooBIT.Asserts;
-using The_Ray_Tracer_Challenge.Extensions;
 using The_Ray_Tracer_Challenge.Comparisson;
+using The_Ray_Tracer_Challenge.Extensions;
 using Xunit;
-using The_Ray_Tracer_Challenge.Constants;
-using System.Linq;
-using System;
 
 namespace The_Ray_Tracer_Challenge.Tests
 {
@@ -388,6 +385,31 @@ namespace The_Ray_Tracer_Challenge.Tests
             DoubleEqualityComparer.Default.Equals(b[2, 3], 105d / 532d).Should().Be.True();
 
             b.Should().Equal(inverse);
+        }
+
+        [Fact]
+        public void Multiply_Product_By_Its_Inverse()
+        {
+            var a = new Matrix(new double[4, 4]
+            {
+                {  3, -9,  7,  3 },
+                {  3, -8,  2, -9 },
+                { -4,  4,  4,  1 },
+                { -6,  5, -1,  1 }
+            });
+
+            var b = new Matrix(new double[4, 4]
+            {
+                {  8,  2,  2,  2 },
+                {  3, -1,  7,  0 },
+                {  7,  0,  5,  4 },
+                {  6, -2,  0,  5 }
+            });
+
+            var c = a * b;
+            var a2 = c * b.Invert();
+
+            a2.Should().Equal(a);
         }
     }
 }
