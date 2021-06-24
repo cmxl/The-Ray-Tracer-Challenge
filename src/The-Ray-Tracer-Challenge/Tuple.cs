@@ -1,8 +1,10 @@
-﻿using The_Ray_Tracer_Challenge.Extensions;
+﻿using System;
+using The_Ray_Tracer_Challenge.Comparisson;
+using The_Ray_Tracer_Challenge.Extensions;
 
 namespace The_Ray_Tracer_Challenge
 {
-    public struct Tuple
+    public struct Tuple : IEquatable<Tuple>
     {
         public Tuple(double x, double y, double z, double w)
         {
@@ -22,12 +24,21 @@ namespace The_Ray_Tracer_Challenge
 
         public override string ToString() => $"Tuple({X},{Y},{Z},{W})";
 
+        public bool Equals(Tuple other)
+           => DoubleEqualityComparer.Default.Equals(X, other.X) &&
+              DoubleEqualityComparer.Default.Equals(Y, other.Y) &&
+              DoubleEqualityComparer.Default.Equals(Z, other.Z) &&
+              DoubleEqualityComparer.Default.Equals(W, other.W);
+
+        public override bool Equals(object obj) => Equals((Tuple)obj);
+        public override int GetHashCode() => HashCode.Combine(X, Y, Z, W);
+
         public static Tuple operator +(Tuple a, Tuple b) => a.Add(b);
         public static Tuple operator -(Tuple a) => a.Negate();
         public static Tuple operator -(Tuple a, Tuple b) => a.Subtract(b);
         public static Tuple operator *(Tuple a, double b) => a.MultiplyBy(b);
         public static Tuple operator /(Tuple a, double b) => a.DivideBy(b);
-        
+
         public static implicit operator Color(Tuple tuple) => new Color(tuple.X, tuple.Y, tuple.Z);
 
         public static implicit operator Point(Tuple tuple)
