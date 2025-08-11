@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Linq;
 using The_Ray_Tracer_Challenge.Comparisson;
-using The_Ray_Tracer_Challenge.Constants;
 using The_Ray_Tracer_Challenge.Extensions;
 
 namespace The_Ray_Tracer_Challenge
@@ -46,7 +45,7 @@ namespace The_Ray_Tracer_Challenge
             return sameRank && sameDimension && sequenceEqual;
         }
 
-        public override bool Equals(object obj) => obj is Matrix matrix && Equals(matrix);
+        public override bool Equals(object? obj) => obj is Matrix matrix && Equals(matrix);
         public override int GetHashCode() => HashCode.Combine(_matrix);
         public IEnumerator GetEnumerator() => _matrix.GetEnumerator();
         public static bool operator ==(Matrix a, Matrix b) => a.Equals(b);
@@ -63,7 +62,19 @@ namespace The_Ray_Tracer_Challenge
             return result;
         }
 
-        public static Matrix operator /(Matrix a, double quotient) 
+        public static Matrix operator +(Matrix a, Matrix b)
+        {
+            var result = a;
+            for (var row = 0; row < result.Rows; row++)
+                for (var column = 0; column < result.Columns; column++)
+                    result[row, column] += b[row, column];
+
+            return result;
+        }
+
+
+
+        public static Matrix operator /(Matrix a, double quotient)
             => a * (1 / quotient);
 
         public static implicit operator Tuple(Matrix matrix)

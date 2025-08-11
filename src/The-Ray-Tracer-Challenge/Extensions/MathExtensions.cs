@@ -28,5 +28,11 @@ namespace The_Ray_Tracer_Challenge.Extensions
 
             return value;
         }
+
+        public static double DegreeToRadians(this double degree)
+            => degree * Math.PI / 180;
+
+        public static double RadiansToDegree(this double radians)
+           => radians * 180 / Math.PI;
     }
 }
