@@ -1,7 +1,5 @@
 ﻿using System;
 using The_Ray_Tracer_Challenge.Comparisson;
-using The_Ray_Tracer_Challenge.Constants;
-using The_Ray_Tracer_Challenge.Extensions;
 
 namespace The_Ray_Tracer_Challenge
 {
@@ -26,11 +24,11 @@ namespace The_Ray_Tracer_Challenge
                DoubleEqualityComparer.Default.Equals(Z, other.Z) &&
                DoubleEqualityComparer.Default.Equals(W, other.W);
 
-        public override bool Equals(object obj) => Equals((Point)obj);
+        public override bool Equals(object? obj) => obj is Point point && Equals(point);
         public override int GetHashCode() => HashCode.Combine(X, Y, Z, W);
         public static bool operator ==(Point left, Point right) => left.Equals(right);
         public static bool operator !=(Point left, Point right) => !(left == right);
-        public static implicit operator Tuple(Point point) => new Tuple(point.X, point.Y, point.Z, point.W);
+        public static implicit operator Tuple(Point point) => new(point.X, point.Y, point.Z, point.W);
         public override string ToString() => $"Point({X}, {Y}, {Z})";
     }
 }

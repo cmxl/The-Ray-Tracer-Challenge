@@ -30,7 +30,7 @@ namespace The_Ray_Tracer_Challenge
               DoubleEqualityComparer.Default.Equals(Z, other.Z) &&
               DoubleEqualityComparer.Default.Equals(W, other.W);
 
-        public override bool Equals(object obj) => Equals((Tuple)obj);
+        public override bool Equals(object? obj) => obj is Tuple tuple && Equals(tuple);
         public override int GetHashCode() => HashCode.Combine(X, Y, Z, W);
 
         public static Tuple operator +(Tuple a, Tuple b) => a.Add(b);
@@ -39,7 +39,7 @@ namespace The_Ray_Tracer_Challenge
         public static Tuple operator *(Tuple a, double b) => a.MultiplyBy(b);
         public static Tuple operator /(Tuple a, double b) => a.DivideBy(b);
 
-        public static implicit operator Color(Tuple tuple) => new Color(tuple.X, tuple.Y, tuple.Z);
+        public static implicit operator Color(Tuple tuple) => new(tuple.X, tuple.Y, tuple.Z);
 
         public static implicit operator Point(Tuple tuple)
         {
@@ -47,7 +47,7 @@ namespace The_Ray_Tracer_Challenge
             {
                 return new Point(tuple.X, tuple.Y, tuple.Z);
             }
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         public static implicit operator Vector(Tuple tuple)
@@ -56,10 +56,10 @@ namespace The_Ray_Tracer_Challenge
             {
                 return new Vector(tuple.X, tuple.Y, tuple.Z);
             }
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
-        public static implicit operator Matrix(Tuple tuple) => new Matrix(new double[4, 1] {
+        public static implicit operator Matrix(Tuple tuple) => new(new double[4, 1] {
             { tuple.X },
             { tuple.Y },
             { tuple.Z },

@@ -1,6 +1,5 @@
 ﻿using System;
 using The_Ray_Tracer_Challenge.Comparisson;
-using The_Ray_Tracer_Challenge.Constants;
 using The_Ray_Tracer_Challenge.Extensions;
 
 namespace The_Ray_Tracer_Challenge
@@ -28,11 +27,11 @@ namespace The_Ray_Tracer_Challenge
                DoubleEqualityComparer.Default.Equals(Z, other.Z) &&
                DoubleEqualityComparer.Default.Equals(W, other.W);
 
-        public override bool Equals(object obj) => Equals((Vector)obj);
+        public override bool Equals(object? obj) => obj is Vector vector && Equals(vector);
         public override int GetHashCode() => HashCode.Combine(X, Y, Z, W);
         public static bool operator ==(Vector left, Vector right) => left.Equals(right);
         public static bool operator !=(Vector left, Vector right) => !(left == right);
-        public static implicit operator Tuple(Vector vector) => new Tuple(vector.X, vector.Y, vector.Z, vector.W);
+        public static implicit operator Tuple(Vector vector) => new(vector.X, vector.Y, vector.Z, vector.W);
         public override string ToString() => $"Vector({X}, {Y}, {Z})";
 
         
